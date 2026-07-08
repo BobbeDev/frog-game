@@ -14,13 +14,13 @@ func kill():
 
 func _on_body_entered(body: Node) -> void:
 	if multiplayer.is_server():
-		if body.is_in_group("Player"):
+		if body.is_in_group("Player") && !MultiplayerManager.round_won:
 			var target = MultiplayerManager.player_data.get(body.name).name
 			if target != null:
 				var node_path = "/root/Main/" + body.name
 				
 				#if MultiplayerManager.player_amount > 2:
-				body.can_shoot = false
+				body.dead = true
 				print("PLAYER AMM: ", MultiplayerManager.player_amount)
 				rpc_id(1, "send_score", spawner, body.name)
 				get_node(node_path).rpc_id(int(body.name), "die")

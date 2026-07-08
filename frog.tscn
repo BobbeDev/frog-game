@@ -134,6 +134,9 @@ properties/8/replication_mode = 1
 properties/9/path = NodePath("Skin:animation")
 properties/9/spawn = true
 properties/9/replication_mode = 1
+properties/10/path = NodePath(".:player_color")
+properties/10/spawn = true
+properties/10/replication_mode = 2
 
 [node name="Frog" type="CharacterBody2D" unique_id=1549518833 groups=["Player"]]
 motion_mode = 1

@@ -20,7 +20,7 @@ properties/1/path = NodePath("Skin:modulate")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
-[node name="Bullet" type="RigidBody2D" unique_id=1467795752]
+[node name="Bullet" type="RigidBody2D" unique_id=1467795752 groups=["Bullet"]]
 z_index = 10
 physics_material_override = SubResource("PhysicsMaterial_cm0pq")
 gravity_scale = 0.0

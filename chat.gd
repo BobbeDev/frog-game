@@ -5,13 +5,23 @@ const MESSAGE_TIME: float = 3
 @rpc("any_peer", "call_local")
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	$TextEdit/LineEdit.clear()
+	new_text = WipeBrackets(new_text)
 	rpc("send_text", new_text, MultiplayerManager.username)
+
+func WipeBrackets(Text):
+	#removes the text effects from the text length yes yes
+	var regex = RegEx.new()
+	regex.compile("\\[.*?\\]")
+	var RetText = regex.sub(Text, "", true)
+	return RetText
 
 @rpc("any_peer", "call_local")
 func send_text(txt: String, username: String):
-	$TextEdit.text += username + ": " + txt + "\n"
-	$TextEdit.scroll_vertical = INF
+	$TextEdit/RichTextLabel.text += username + ": " + txt + "\n"
 	$TextEdit.show()
+	#for i in 3:
+	$TextEdit/RichTextLabel.scroll_to_line($TextEdit/RichTextLabel.get_line_count())
+		#await get_tree().process_frame
 	
 	$TextEdit/Timer.wait_time = MESSAGE_TIME
 	$TextEdit/Timer.stop()
@@ -31,6 +41,8 @@ func _process(_delta: float) -> void:
 		if MultiplayerManager.chatting:
 			$TextEdit.hide()
 			$TextEdit/LineEdit.clear()
+			$TextEdit/LineEdit.focus_mode = 0
+			MultiplayerManager.chatting = false
 
 
 func _on_timer_timeout() -> void:
