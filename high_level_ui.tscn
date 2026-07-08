@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://cjpalxw5lu1dc"]
+
+[ext_resource type="Script" uid="uid://oj8kkqr3fmdj" path="res://ui_basic.gd" id="1_eyijp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_eyijp"]
+font_size = 100
+font_color = Color(1, 0.79607844, 0, 1)
+outline_size = 47
+outline_color = Color(1, 0, 1, 1)
+
+[node name="Canvas_UI" type="CanvasLayer" unique_id=461490731]
+script = ExtResource("1_eyijp")
+
+[node name="kids" type="Control" parent="." unique_id=525354602]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Server" type="Button" parent="kids" unique_id=1605458299]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 72.0
+offset_bottom = 36.0
+text = "SERVER"
+
+[node name="Client" type="Button" parent="kids" unique_id=457832787]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 44.0
+offset_right = 76.0
+offset_bottom = 75.0
+text = "CLIENT"
+
+[node name="IP" type="LineEdit" parent="kids" unique_id=1788173550]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 5.0
+offset_right = 550.0
+offset_bottom = 36.0
+text = "localhost"
+placeholder_text = "IP:"
+
+[node name="Port" type="LineEdit" parent="kids" unique_id=54616264]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 45.0
+offset_right = 550.0
+offset_bottom = 76.0
+text = "4174"
+placeholder_text = "Port: "
+
+[node name="Username" type="LineEdit" parent="kids" unique_id=982933335]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 89.0
+offset_right = 269.0
+offset_bottom = 120.0
+placeholder_text = "Username:"
+
+[node name="Server" type="Control" parent="." unique_id=1887632812]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Server" unique_id=844558878]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 48.0
+offset_right = 1068.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU ARE THE SERVER"
+label_settings = SubResource("LabelSettings_eyijp")
+horizontal_alignment = 1
+
+[node name="player_count" type="Label" parent="Server" unique_id=1282114321]
+layout_mode = 0
+offset_left = 106.0
+offset_top = 183.0
+offset_right = 146.0
+offset_bottom = 206.0
+text = "Player count: 0"
+
+[connection signal="pressed" from="kids/Server" to="." method="_on_server_pressed"]
+[connection signal="pressed" from="kids/Client" to="." method="_on_client_pressed"]
