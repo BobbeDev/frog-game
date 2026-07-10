@@ -137,8 +137,49 @@ properties/9/replication_mode = 1
 properties/10/path = NodePath(".:player_color")
 properties/10/spawn = true
 properties/10/replication_mode = 2
+properties/11/path = NodePath("GunHand/Gun:animation")
+properties/11/spawn = true
+properties/11/replication_mode = 1
+properties/12/path = NodePath("GunHand/Gun:frame")
+properties/12/spawn = true
+properties/12/replication_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kk5g"]
+atlas = ExtResource("4_byod8")
+region = Rect2(0, 0, 188, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aumaf"]
+atlas = ExtResource("4_byod8")
+region = Rect2(0, 96, 188, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o353j"]
+atlas = ExtResource("4_byod8")
+region = Rect2(0, 0, 188, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aumaf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kk5g")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aumaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o353j")
+}],
+"loop": false,
+"name": &"Shoot",
+"speed": 10.0
+}]
 
 [node name="Frog" type="CharacterBody2D" unique_id=1549518833 groups=["Player"]]
+collision_layer = 16
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_6ekd3")
@@ -168,7 +209,7 @@ animation = &"Walk"
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2109648248]
 replication_config = SubResource("SceneReplicationConfig_6ekd3")
 
-[node name="Death" type="AudioStreamPlayer" parent="." unique_id=616364359]
+[node name="Death" type="AudioStreamPlayer2D" parent="." unique_id=1646051870]
 stream = ExtResource("4_5cyyp")
 volume_db = -5.0
 
@@ -181,10 +222,12 @@ pitch_scale = 1.25
 [node name="GunHand" type="Node2D" parent="." unique_id=642077367]
 scale = Vector2(0.25, 0.25)
 
-[node name="Gun" type="Sprite2D" parent="GunHand" unique_id=279840622]
+[node name="Gun" type="AnimatedSprite2D" parent="GunHand" unique_id=834179307]
 position = Vector2(250, 0)
-texture = ExtResource("4_byod8")
-vframes = 2
+sprite_frames = SubResource("SpriteFrames_aumaf")
+animation = &"Shoot"
+frame = 1
+frame_progress = 1.0
 
 [node name="Username" type="Label" parent="." unique_id=1599391420]
 anchors_preset = 8

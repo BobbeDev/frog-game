@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://b20y4fk80orx0" path="res://icon.svg" id="4_cm0pq"]
 [ext_resource type="Script" uid="uid://cmcmy04swu0hs" path="res://chat.gd" id="5_fos0i"]
 [ext_resource type="Texture2D" uid="uid://df8kcqpwe0xbe" path="res://dental toy.png" id="6_3dxm6"]
+[ext_resource type="Script" uid="uid://bydk4sqq1d0i8" path="res://ScoreDisplay.gd" id="6_lgr22"]
+[ext_resource type="Script" uid="uid://de8eg161hd4o5" path="res://notifications.gd" id="7_trn2v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fos0i"]
 texture = ExtResource("4_cm0pq")
@@ -17,10 +19,6 @@ texture_region_size = Vector2i(128, 128)
 tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_fos0i")
-
-[sub_resource type="LabelSettings" id="LabelSettings_fos0i"]
-shadow_color = Color(0, 0, 0, 0.7176471)
-shadow_offset = Vector2(2, 2)
 
 [node name="Main" type="Node2D" unique_id=1140740675]
 
@@ -97,8 +95,8 @@ script = ExtResource("5_fos0i")
 [node name="TextEdit" type="TextEdit" parent="Ui" unique_id=1420795306]
 visible = false
 offset_left = 6.0
-offset_top = 329.0
-offset_right = 399.0
+offset_top = 253.0
+offset_right = 291.0
 offset_bottom = 605.0
 focus_mode = 0
 theme_override_colors/font_readonly_color = Color(0.88, 0.88, 0.88, 1)
@@ -107,10 +105,14 @@ context_menu_enabled = false
 wrap_mode = 1
 
 [node name="LineEdit" type="LineEdit" parent="Ui/TextEdit" unique_id=1210296055]
-layout_mode = 0
-offset_top = 281.0
-offset_right = 393.0
-offset_bottom = 312.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 285.0
+offset_bottom = 33.0
+grow_vertical = 0
 
 [node name="Timer" type="Timer" parent="Ui/TextEdit" unique_id=1950660602]
 one_shot = true
@@ -129,30 +131,32 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5568628)
 theme_override_constants/shadow_offset_y = 1
 bbcode_enabled = true
 
-[node name="NotificationCenter" type="VBoxContainer" parent="Ui" unique_id=1638855301]
+[node name="Scores" type="VBoxContainer" parent="Ui" unique_id=472844773]
 visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("6_lgr22")
+
+[node name="Row1" type="HBoxContainer" parent="Ui/Scores" unique_id=1649381084]
+layout_mode = 2
+alignment = 1
+
+[node name="Row2" type="HBoxContainer" parent="Ui/Scores" unique_id=1901023648]
+layout_mode = 2
+alignment = 1
+
+[node name="Notifications" type="VBoxContainer" parent="Ui" unique_id=862045203]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
-
-[node name="Panel" type="Panel" parent="Ui/NotificationCenter" unique_id=140902474]
-custom_minimum_size = Vector2(600, 75)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Ui/NotificationCenter/Panel" unique_id=1708001658]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "BILLY THE FUCKING WHORE KILLED BILLY THE FUCKING WHORE"
-label_settings = SubResource("LabelSettings_fos0i")
-vertical_alignment = 1
-autowrap_mode = 3
+script = ExtResource("7_trn2v")
 
 [node name="DentalToy" type="Sprite2D" parent="." unique_id=902904002]
 texture_filter = 1

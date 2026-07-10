@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://vtljp181vadi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3dxm6"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_lgr22"]
+font_size = 32
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[node name="ScoreBox" type="MarginContainer" unique_id=493559490]
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Panel" type="Panel" parent="." unique_id=2073617909]
+custom_minimum_size = Vector2(180, 100)
+layout_mode = 2
+
+[node name="Points" type="Label" parent="Panel" unique_id=1449329025]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "999"
+label_settings = SubResource("LabelSettings_3dxm6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Panel" unique_id=294168057]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -155.0
+offset_right = 116.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Peanut Butter Gamer"
+label_settings = SubResource("LabelSettings_lgr22")
+horizontal_alignment = 1
+autowrap_mode = 3

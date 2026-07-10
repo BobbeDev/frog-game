@@ -103,6 +103,10 @@ AimDown={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_5="Player"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

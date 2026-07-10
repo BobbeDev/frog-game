@@ -17,19 +17,22 @@ func _enter_tree() -> void:
 		#MultiplayerManager.count_players.rpc()
 		player_color = MultiplayerManager.get_color()
 		$Skin.modulate = player_color
+		if MultiplayerManager.username == "": MultiplayerManager.username = MultiplayerManager.get_default_name()
 		$Username.text = MultiplayerManager.username
 		$Yelp.pitch_scale = randf_range(0.8, 1.2)
 		#rpc_id(1, "MultiplayerManager.add_data", str(multiplayer.get_unique_id()), MultiplayerManager.username)
 		#rpc("spawn_bullet", [name])
 		rpc_id(1, "send_data", str(multiplayer.get_unique_id()), MultiplayerManager.username)
+		respawn()
 
 @rpc("any_peer", "reliable")
 func send_data(p_id: String, p_name: String):
 	MultiplayerManager.add_data(p_id, p_name, MultiplayerManager.get_color())
 
 @rpc("authority","call_local", "reliable")
-func spawn_bullet(_name, pos: Vector2, vel: Vector2, id: String, col: Color):
+func spawn_bullet(pos: Vector2, vel: Vector2, id: String, col: Color):
 	if gun_reloaded && !dead:
+		rpc("shot_success", id)
 		var bullet_obj = bullet_scene.instantiate()
 		get_node("/root/Main").add_child(bullet_obj, true)
 		bullet_obj.linear_velocity = vel
@@ -67,7 +70,7 @@ func _process(delta):
 		$GunHand.look_at(get_global_mouse_position())
 	if Input.is_action_pressed("Shoot"):
 		#spawn_bullet(name)
-		rpc_id(1, "spawn_bullet", name, $GunHand/Gun.global_position, $GunHand/Gun.global_transform.basis_xform(Vector2.RIGHT) * 3000, name, $Skin.modulate)
+		rpc_id(1, "spawn_bullet", $GunHand/Gun.global_position, $GunHand/Gun.global_transform.basis_xform(Vector2.RIGHT) * 3000, name, $Skin.modulate)
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		using_controller = false
@@ -89,13 +92,17 @@ func die():
 func die_sound(id: String):
 	if name == id:
 		$Death.play()
-		
+
+@rpc("any_peer", "call_local", "reliable")
+func shot_success(id: String):
+	if name == id:
+		$GunHand/Gun.play("Shoot")
 
 @rpc("any_peer", "call_local", "reliable")
 func respawn():
 	dead = false
 	#print("RESPAWNING ", multiplayer.get_unique_id(), "     ", name)
-	global_position = get_node("/root/Main/SpawnPositions").get_child(randi_range(0, 8)).global_position
+	global_position = get_node("/root/Main/SpawnPositions").get_child(randi_range(0, 8)).global_position + Vector2(randi_range(-50, 50), randi_range(-50, 50))
 
 func _on_bullet_timer_timeout() -> void:
 	gun_reloaded = true

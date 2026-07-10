@@ -21,7 +21,6 @@ func _on_body_entered(body: Node) -> void:
 				
 				#if MultiplayerManager.player_amount > 2:
 				body.dead = true
-				print("PLAYER AMM: ", MultiplayerManager.player_amount)
 				rpc_id(1, "send_score", spawner, body.name)
 				get_node(node_path).rpc_id(int(body.name), "die")
 				queue_free()
