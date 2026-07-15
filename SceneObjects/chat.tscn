@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://gtjh7xk6ywbo"]
+
+[ext_resource type="PackedScene" uid="uid://cjpalxw5lu1dc" path="res://SceneObjects/high_level_ui.tscn" id="1_dg5i7"]
+
+[node name="Chat" type="Node2D" unique_id=38290260]
+
+[node name="Canvas_UI" parent="." unique_id=461490731 instance=ExtResource("1_dg5i7")]
+
+[node name="TextEdit" type="TextEdit" parent="." unique_id=2131506279]
+offset_left = 6.0
+offset_top = 329.0
+offset_right = 399.0
+offset_bottom = 605.0
+placeholder_text = "no messages yet"
+editable = false
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=1875400603]
+offset_left = 6.0
+offset_top = 610.0
+offset_right = 399.0
+offset_bottom = 641.0
+focus_mode = 0
+
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cl5eyc5xjm1uf"]
+
+[ext_resource type="PackedScene" uid="uid://cjpalxw5lu1dc" path="res://SceneObjects/high_level_ui.tscn" id="1_3kf3n"]
+
+[node name="Main" type="Node2D" unique_id=765767874]
+
+[node name="Main" parent="." unique_id=461490731 instance=ExtResource("1_3kf3n")]
+
+[editable path="Main"]

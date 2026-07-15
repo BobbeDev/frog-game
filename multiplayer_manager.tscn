@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://bj1cis81qtdy5"]
-
-[ext_resource type="Script" uid="uid://beplx51e7342j" path="res://multiplayer_manager.gd" id="1_l1ko5"]
-
-[node name="MultiplayerManager" type="Node" unique_id=953736335]
-script = ExtResource("1_l1ko5")
-colors = Array[Color]([Color(0.48235294, 0.8509804, 0.25882354, 1), Color(0.32999998, 0.45283318, 1, 1), Color(0.82, 0.090200014, 0.10236315, 1), Color(0.8973332, 0.120000005, 1, 1), Color(1, 0.49366665, 0.01999998, 1), Color(0, 0.48, 0.224, 1), Color(0.30692276, 0.30692267, 0.3069227, 1), Color(1, 1, 1, 1), Color(0.21699989, 0.13, 1, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1)])
-placeholder_names = Array[String](["pesky slime", "petty slime", "patient slime", "pretty slime", "perceptive slime", "practical slime", "polite slime", "pure slime", "fucking ugly slime", "penis slime", "PLAYER 11", "PLAYER 12", "PLAYER 13", "PLAYER 14", "PLAYER 15", "PLAYER 16", "PLAYER 17", "PLAYER 18", "PLAYER 19", "PLAYER 20", "PLAYER 21", "PLAYER 22", "PLAYER 23", "PLAYER 24", "PLAYER 25", "PLAYER 26", "PLAYER 27", "PLAYER 28", "PLAYER 29", "PLAYER 30", "PLAYER 31", "PLAYER 32"])

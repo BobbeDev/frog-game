@@ -1,0 +1,182 @@
+[gd_scene format=4 uid="uid://uq33qmqgucef"]
+
+[ext_resource type="Script" uid="uid://jc0eclnjgtty" path="res://Scripts/LevelProperties.gd" id="1_gqa7q"]
+[ext_resource type="Script" uid="uid://lbegng7fxkjm" path="res://Scripts/high_level_player_spawner.gd" id="1_lolwk"]
+[ext_resource type="PackedScene" uid="uid://cx5vkgxf002vo" path="res://SceneObjects/frog.tscn" id="2_wgubu"]
+[ext_resource type="Texture2D" uid="uid://df8kcqpwe0xbe" path="res://Sprites/dental toy.png" id="3_wgubu"]
+[ext_resource type="Script" uid="uid://cmcmy04swu0hs" path="res://Scripts/chat.gd" id="4_vmftg"]
+[ext_resource type="Script" uid="uid://bydk4sqq1d0i8" path="res://Scripts/ScoreDisplay.gd" id="5_s3paf"]
+[ext_resource type="Script" uid="uid://de8eg161hd4o5" path="res://Scripts/notifications.gd" id="6_gqa7q"]
+[ext_resource type="Texture2D" uid="uid://b20y4fk80orx0" path="res://Sprites/icon.svg" id="7_s3paf"]
+[ext_resource type="Script" uid="uid://74uy46k5bccw" path="res://Scripts/LobbyUi.gd" id="8_yg8gm"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gqa7q"]
+texture = ExtResource("7_s3paf")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_yg8gm"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_gqa7q")
+
+[node name="Main" type="Node2D" unique_id=1051781754]
+script = ExtResource("1_gqa7q")
+bullets_do_damage = false
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=578697742]
+_spawnable_scenes = PackedStringArray("uid://cx5vkgxf002vo", "uid://b8a88maqfgkpf")
+spawn_path = NodePath("..")
+script = ExtResource("1_lolwk")
+network_player = ExtResource("2_wgubu")
+
+[node name="DentalToy" type="Sprite2D" parent="." unique_id=383780932]
+position = Vector2(868.00006, 531)
+scale = Vector2(11.75, 13.66)
+texture = ExtResource("3_wgubu")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=635160440]
+modulate = Color(0.44, 0.44, 0.44, 0.40392157)
+z_index = -50
+texture_repeat = 2
+position = Vector2(704.5, 352.00003)
+scale = Vector2(0.56031245, 0.68)
+texture = ExtResource("7_s3paf")
+region_enabled = true
+region_rect = Rect2(0, 0, 3200, 1600)
+
+[node name="Ui" type="CanvasLayer" parent="." unique_id=1754597962]
+script = ExtResource("4_vmftg")
+
+[node name="TextEdit" type="TextEdit" parent="Ui" unique_id=1969863307]
+visible = false
+offset_left = 6.0
+offset_top = 253.0
+offset_right = 291.0
+offset_bottom = 605.0
+focus_mode = 0
+theme_override_colors/font_readonly_color = Color(0.88, 0.88, 0.88, 1)
+editable = false
+context_menu_enabled = false
+wrap_mode = 1
+
+[node name="LineEdit" type="LineEdit" parent="Ui/TextEdit" unique_id=190033639]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 285.0
+offset_bottom = 33.0
+grow_vertical = 0
+
+[node name="Timer" type="Timer" parent="Ui/TextEdit" unique_id=1633362316]
+one_shot = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Ui/TextEdit" unique_id=1918197236]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 8.0
+offset_right = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5568628)
+theme_override_constants/shadow_offset_y = 1
+bbcode_enabled = true
+
+[node name="Scores" type="VBoxContainer" parent="Ui" unique_id=1509156220]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("5_s3paf")
+
+[node name="Row1" type="HBoxContainer" parent="Ui/Scores" unique_id=1139111169]
+layout_mode = 2
+alignment = 1
+
+[node name="Row2" type="HBoxContainer" parent="Ui/Scores" unique_id=146440620]
+layout_mode = 2
+alignment = 1
+
+[node name="Notifications" type="VBoxContainer" parent="Ui" unique_id=2062431919]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = ExtResource("6_gqa7q")
+
+[node name="Control" type="Control" parent="Ui" unique_id=1241870715]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_yg8gm")
+
+[node name="Label" type="Label" parent="Ui/Control" unique_id=1235510020]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -309.5
+offset_top = -256.0
+offset_right = 309.5
+offset_bottom = -216.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 29
+text = "This is what we in the industry call the lobby"
+
+[node name="PlayerCount" type="Label" parent="Ui/Control" unique_id=1275766004]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -309.5
+offset_top = 237.0
+offset_right = 309.5
+offset_bottom = 277.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 29
+text = "99/8 Players"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Ui/Control" unique_id=1731646771]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = 990.0
+offset_top = 581.0
+offset_right = 1141.0
+offset_bottom = 634.0
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "Ready up"
+
+[node name="Layer0" type="TileMapLayer" parent="." unique_id=461703440]
+use_parent_material = true
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD9/wIAAAAAAAAAAAD9//3/AAAAAAAAAAD9//7/AAAAAAAAAAD9////AAAAAAAAAAD9/wAAAAAAAAAAAAD9/wEAAAAAAAAAAAACAP3/AAAAAAAAAAD+//3/AAAAAAAAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAADAP3/AAAAAAAAAAAEAP3/AAAAAAAAAAAFAP3/AAAAAAAAAAAGAP3/AAAAAAAAAAAHAP3/AAAAAAAAAAAIAP3/AAAAAAAAAAAJAP3/AAAAAAAAAAAKAP3/AAAAAAAAAAALAP3/AAAAAAAAAAAMAP3/AAAAAAAAAAANAP3/AAAAAAAAAAAOAP3/AAAAAAAAAAAPAP3/AAAAAAAAAAAQAP3/AAAAAAAAAAARAP3/AAAAAAAAAAAYAAIAAAAAAAAAAAAYAAEAAAAAAAAAAAAYAAAAAAAAAAAAAAAYAP//AAAAAAAAAAAYAP7/AAAAAAAAAAAYAP3/AAAAAAAAAAAXAP3/AAAAAAAAAAAWAP3/AAAAAAAAAAAVAP3/AAAAAAAAAAAUAP3/AAAAAAAAAAATAP3/AAAAAAAAAAASAP3/AAAAAAAAAAD+/wIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAD9/wQAAAAAAAAAAAD9/wUAAAAAAAAAAAD9/wYAAAAAAAAAAAD9/wcAAAAAAAAAAAD9/wgAAAAAAAAAAAD9/wkAAAAAAAAAAAD9/woAAAAAAAAAAAD9/wsAAAAAAAAAAAD9/wwAAAAAAAAAAAAYAAQAAAAAAAAAAAAYAAUAAAAAAAAAAAAYAAYAAAAAAAAAAAAYAAcAAAAAAAAAAAAYAAgAAAAAAAAAAAAYAAkAAAAAAAAAAAAYAAoAAAAAAAAAAAAYAAsAAAAAAAAAAAAYAAwAAAAAAAAAAAD9/w0AAAAAAAAAAAD+/w0AAAAAAAAAAAD//w0AAAAAAAAAAAAAAA0AAAAAAAAAAAABAA0AAAAAAAAAAAACAA0AAAAAAAAAAAADAA0AAAAAAAAAAAAEAA0AAAAAAAAAAAAFAA0AAAAAAAAAAAAGAA0AAAAAAAAAAAAHAA0AAAAAAAAAAAAIAA0AAAAAAAAAAAAJAA0AAAAAAAAAAAAKAA0AAAAAAAAAAAALAA0AAAAAAAAAAAAMAA0AAAAAAAAAAAANAA0AAAAAAAAAAAAOAA0AAAAAAAAAAAAPAA0AAAAAAAAAAAAQAA0AAAAAAAAAAAARAA0AAAAAAAAAAAASAA0AAAAAAAAAAAATAA0AAAAAAAAAAAAUAA0AAAAAAAAAAAAVAA0AAAAAAAAAAAAWAA0AAAAAAAAAAAAXAA0AAAAAAAAAAAAYAA0AAAAAAAAAAAD9/wMAAAAAAAAAAAAYAAMAAAAAAAAAAAACAAEAAAAAAAAAAAACAP7/AAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAoAAAAAAAAAAAADAAsAAAAAAAAAAAADAAwAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAARAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAMAAAAAAAAAAAAWAAMAAAAAAAAAAAAXAAMAAAAAAAAAAAALAAMAAAAAAAAAAAAQAAMAAAAAAAAAAAADAAYAAAAAAAAAAAAPAAMAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_yg8gm")
+use_kinematic_bodies = true
+physics_quadrant_size = 64
+
+[connection signal="spawned" from="MultiplayerSpawner" to="MultiplayerSpawner" method="_on_spawned"]
+[connection signal="text_submitted" from="Ui/TextEdit/LineEdit" to="Ui" method="_on_line_edit_text_submitted"]
+[connection signal="timeout" from="Ui/TextEdit/Timer" to="Ui" method="_on_timer_timeout"]
+[connection signal="toggled" from="Ui/Control/Button" to="Ui/Control" method="ready_up_toggled"]

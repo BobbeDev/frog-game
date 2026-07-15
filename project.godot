@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="FrogGameTest"
-run/main_scene="uid://bk2jjkcdq1vxk"
+run/main_scene="uid://cl5eyc5xjm1uf"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Sprites/icon.svg"
 
 [autoload]
 

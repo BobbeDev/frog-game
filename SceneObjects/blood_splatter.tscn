@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://prd3i5k448xd"]
+
+[ext_resource type="Texture2D" uid="uid://bkof626pqw7g6" path="res://Sprites/blood_splatter.png" id="1_nd4dr"]
+
+[node name="BloodSplatter" type="Sprite2D" unique_id=1490578520]
+self_modulate = Color(1, 1, 1, 0.7647059)
+z_index = -5
+texture_filter = 1
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_nd4dr")
