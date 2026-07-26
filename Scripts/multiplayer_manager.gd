@@ -68,11 +68,12 @@ func add_score(bullet_id: String, hitplayer_id: String):
 				for pl in players: scores.append(player_data.get(pl.name).score)
 				rpc("spawn_popup", names, scores, ids, p.name, player_data.get(p.name).color)
 		
+		await get_tree().create_timer(3).timeout
 		if winner_id != "":
+			for id in multiplayer.get_peers():
+				player_data[str(id)].score = 0
 			rpc("change_scene", "res://Scenes/Lobby.tscn")
 			return
-		
-		await get_tree().create_timer(3).timeout
 		kills = 0
 		round_won = false
 		
@@ -93,7 +94,7 @@ func change_scene(scene):
 	if multiplayer.is_server():
 		var players = get_tree().get_nodes_in_group("Player")
 		for p in players:
-			print(p.name)
+			#print(p.name)
 			#pass
 			#p.get_node("MultiplayerSynchronizer").public_visibility = false
 			p.queue_free()
@@ -118,3 +119,11 @@ func ready_up(is_ready: bool, id: String):
 	if all_ready == true:
 		#await get_tree().create_timer(1).timeout
 		rpc("change_scene", "res://Scenes/Main.tscn")
+
+func _process(_delta: float) -> void:
+	if multiplayer.is_server():
+		var textgen: String = ""
+		for id in multiplayer.get_peers():
+			if player_data.has(str(id)):
+				textgen += str(player_data.get(str(id)).name) + "   " + str(player_data.get(str(id)).score) + "   " + str(player_data.get(str(id)).color) + "   " + str(player_data.get(str(id)).ready) + "\n"
+		$Server/Label2.text = textgen

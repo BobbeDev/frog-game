@@ -163,6 +163,7 @@ grow_horizontal = 0
 script = ExtResource("7_1p5hy")
 
 [node name="Label" type="Label" parent="Ui" unique_id=44643293]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

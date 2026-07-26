@@ -31,3 +31,9 @@ grow_vertical = 2
 text = "YOU ARE THE SERVER"
 label_settings = SubResource("LabelSettings_6jk5e")
 horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Server" unique_id=1412789806]
+offset_left = 14.0
+offset_top = 148.0
+offset_right = 54.0
+offset_bottom = 171.0
