@@ -23,6 +23,7 @@ sources/0 = SubResource("TileSetAtlasSource_gqa7q")
 
 [node name="Main" type="Node2D" unique_id=1051781754]
 script = ExtResource("1_gqa7q")
+map_type = 0
 bullets_do_damage = false
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=578697742]

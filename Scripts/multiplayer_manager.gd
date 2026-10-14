@@ -90,6 +90,7 @@ func spawn_popup(names, scores, ids, winner, color):
 
 @rpc("authority", "call_local", "reliable")
 func change_scene(scene):
+	kills = 0
 	player_amount = 0
 	if multiplayer.is_server():
 		var players = get_tree().get_nodes_in_group("Player")

@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bk2jjkcdq1vxk"]
+
+[ext_resource type="Texture2D" uid="uid://dagbs3hyiuaq7" path="res://frog.png" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://djwhlg64vt2u4" path="res://Movement.gd" id="1_uu6xs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uu6xs"]
+radius = 24.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glv2v"]
+atlas = ExtResource("1_glv2v")
+region = Rect2(0, 0, 246, 219)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uu6xs"]
+atlas = ExtResource("1_glv2v")
+region = Rect2(246, 0, 246, 219)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0du0"]
+atlas = ExtResource("1_glv2v")
+region = Rect2(492, 0, 246, 219)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rxg2q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glv2v")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uu6xs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0du0")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=1140740675]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=965254754]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1293695624]
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+color = Color(0.5179753, 0.5179753, 0.5179753, 1)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1785553965]
+script = ExtResource("1_uu6xs")
+speed = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=476228703]
+shape = SubResource("CircleShape2D_uu6xs")
+
+[node name="Frog" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1268803351]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rxg2q")
+animation = &"Idle"
+frame_progress = 0.21277715

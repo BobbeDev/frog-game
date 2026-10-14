@@ -13,7 +13,8 @@ config_version=5
 config/name="FrogGameTest"
 run/main_scene="uid://cl5eyc5xjm1uf"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://Sprites/icon.svg"
+run/max_fps=60
+config/icon="uid://twurmapbkpqx"
 
 [autoload]
 

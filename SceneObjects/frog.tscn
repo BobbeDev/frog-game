@@ -143,6 +143,12 @@ properties/11/replication_mode = 1
 properties/12/path = NodePath("GunHand/Gun:frame")
 properties/12/spawn = true
 properties/12/replication_mode = 1
+properties/13/path = NodePath("CollisionShape2D:disabled")
+properties/13/spawn = true
+properties/13/replication_mode = 1
+properties/14/path = NodePath(".:modulate")
+properties/14/spawn = true
+properties/14/replication_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kk5g"]
 atlas = ExtResource("4_byod8")

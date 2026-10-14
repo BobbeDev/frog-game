@@ -86,6 +86,8 @@ func ribbit():
 @rpc("any_peer", "call_local", "reliable")
 func die():
 	#put em in the loser box
+	$CollisionShape2D.disabled = true
+	modulate = Color(1, 1, 1, 0.25)
 	global_position = Vector2(2525, 96)#get_node("/root/Main/SpawnPositions").get_child(randi_range(0, 8)).global_position
 	rpc("die_sound", name)
 
@@ -104,6 +106,8 @@ func respawn():
 	dead = false
 	#print("RESPAWNING ", multiplayer.get_unique_id(), "     ", name)
 	if get_node_or_null("/root/Main/SpawnPositions") != null:
+		$CollisionShape2D.disabled = false
+		modulate = Color.WHITE
 		global_position = get_node("/root/Main/SpawnPositions").get_child(randi_range(0, 8)).global_position + Vector2(randi_range(-50, 50), randi_range(-50, 50))
 
 @rpc("any_peer","call_local", "reliable")
