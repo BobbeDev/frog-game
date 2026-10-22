@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dl6j5qwmyjr2x"]
+
+[ext_resource type="Script" uid="uid://lbegng7fxkjm" path="res://Scripts/high_level_player_spawner.gd" id="1_np7ti"]
+[ext_resource type="PackedScene" uid="uid://cx5vkgxf002vo" path="res://SceneObjects/frog_gun.tscn" id="2_g0oau"]
+[ext_resource type="PackedScene" uid="uid://che0ry8kwj2ij" path="res://SceneObjects/frog_gun_fast.tscn" id="3_u27ul"]
+[ext_resource type="PackedScene" uid="uid://bxouds3k8erel" path="res://SceneObjects/frog_gun_slow.tscn" id="4_0k6sl"]
+[ext_resource type="PackedScene" uid="uid://dkfx2r1mxumb8" path="res://SceneObjects/frog_gun_limited.tscn" id="5_g0oau"]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" unique_id=265483920]
+_spawnable_scenes = PackedStringArray("uid://b8a88maqfgkpf", "uid://cx5vkgxf002vo", "uid://che0ry8kwj2ij", "uid://bxouds3k8erel", "uid://dkfx2r1mxumb8", "uid://c4prmnust4y1i")
+spawn_path = NodePath("..")
+script = ExtResource("1_np7ti")
+network_players = Array[PackedScene]([ExtResource("2_g0oau"), ExtResource("3_u27ul"), ExtResource("4_0k6sl"), ExtResource("5_g0oau")])
+
+[connection signal="spawned" from="." to="." method="_on_spawned"]

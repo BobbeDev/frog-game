@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bxw1o5pwvnlix"
-path="res://.godot/imported/frog-croak.wav-5b729a2f5d606981dbd42e59607ea60b.sample"
+uid="uid://bugyogo3s25wu"
+path="res://.godot/imported/hurt.wav-910fcde551bc46299e1038092f3be973.sample"
 
 [deps]
 
-source_file="res://frog-croak.wav"
-dest_files=["res://.godot/imported/frog-croak.wav-5b729a2f5d606981dbd42e59607ea60b.sample"]
+source_file="res://Audio/hurt.wav"
+dest_files=["res://.godot/imported/hurt.wav-910fcde551bc46299e1038092f3be973.sample"]
 
 [params]
 

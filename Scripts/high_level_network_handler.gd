@@ -8,6 +8,7 @@ func start_server(_ip, port):
 	peer.create_server(port)
 	multiplayer.multiplayer_peer = peer
 	MultiplayerManager.get_child(0).show()
+	MultiplayerManager.username = "[SERVER]"
 
 func start_client(ip, port):
 	var peer = ENetMultiplayerPeer.new()

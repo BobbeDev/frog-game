@@ -1,14 +1,24 @@
 extends CharacterBody2D
 
 @export var speed: float = 10
+@export var bullet_speed: float = 3000
+@export var dash_force: float = 300
+@export var dash_brake: float = 1000
 @export var bullet_scene: PackedScene
 @export var player_color: Color
+@export_subgroup("bullet settings")
+@export var limited_bullets: bool = false
+@export var starting_bullets: int = 5
+@export var max_bullets: int = 5
 
 @onready var blood_splatter: PackedScene = preload("res://SceneObjects/blood_splatter.tscn")
 
 var dead = false
 var gun_reloaded: bool = true
+var dash_reloaded: bool = true
 var using_controller: bool
+var dash: Vector2
+var remaining_bullets: int = starting_bullets
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
@@ -33,15 +43,18 @@ func send_data(p_id: String, p_name: String):
 @rpc("authority","call_local", "reliable")
 func spawn_bullet(pos: Vector2, vel: Vector2, id: String, col: Color):
 	if gun_reloaded && !dead:
-		rpc("shot_success", id)
-		var bullet_obj = bullet_scene.instantiate()
-		get_node("/root/Main").add_child(bullet_obj, true)
-		bullet_obj.linear_velocity = vel
-		bullet_obj.global_position = pos
-		bullet_obj.spawner = id
-		bullet_obj.get_child(0).modulate = col
-		gun_reloaded = false
-		$BulletTimer.start()
+		if !limited_bullets || (limited_bullets && remaining_bullets > 0):
+			rpc("shot_success", id)
+			var bullet_obj = bullet_scene.instantiate()
+			get_node("/root/Main").add_child(bullet_obj, true)
+			bullet_obj.linear_velocity = vel
+			bullet_obj.global_position = pos
+			bullet_obj.spawner = id
+			bullet_obj.get_child(0).modulate = col
+			gun_reloaded = false
+			$BulletTimer.start()
+			MultiplayerManager.bullet_fired()
+			if limited_bullets: remaining_bullets -= 1
 
 func _process(delta):
 	if !is_multiplayer_authority(): return
@@ -58,10 +71,19 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("Bup"):
 		rpc("ribbit")
+	
+	if Input.is_action_just_pressed("Dash") && dash_reloaded && input != Vector2.ZERO:
+		dash = input * speed * dash_force
+		dash_reloaded = false
+		$DashTimer.start()
+		rpc("dash_sound")
+	if dash.length() > 0:
+		dash = dash.move_toward(Vector2.ZERO, speed * dash_brake * delta)
+	
 	if $Yelp.playing:
 		$Frog.play("Glup")
 		$Skin.play("Glup")
-	velocity = input * speed * 100 * delta
+	velocity = ((input * speed * 100) + dash) * delta
 	move_and_slide()
 	
 	if using_controller:
@@ -70,8 +92,13 @@ func _process(delta):
 	else:
 		$GunHand.look_at(get_global_mouse_position())
 	if Input.is_action_pressed("Shoot"):
-		#spawn_bullet(name)
-		rpc_id(1, "spawn_bullet", $GunHand/Gun.global_position, $GunHand/Gun.global_transform.basis_xform(Vector2.RIGHT) * 3000, name, $Skin.modulate)
+		if gun_reloaded && !dead:
+			#pretend shooting
+			if !limited_bullets || (limited_bullets && remaining_bullets > 0):
+				gun_reloaded = false
+				$BulletTimer.start()
+				if limited_bullets: remaining_bullets -= 1
+				rpc_id(1, "spawn_bullet", $GunHand/Gun.global_position, $GunHand/Gun.global_transform.basis_xform(Vector2.RIGHT) * bullet_speed, name, $Skin.modulate)
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		using_controller = false
@@ -85,16 +112,22 @@ func ribbit():
 
 @rpc("any_peer", "call_local", "reliable")
 func die():
+	dead = true
 	#put em in the loser box
 	$CollisionShape2D.disabled = true
 	modulate = Color(1, 1, 1, 0.25)
-	global_position = Vector2(2525, 96)#get_node("/root/Main/SpawnPositions").get_child(randi_range(0, 8)).global_position
+	global_position = get_node("/root/Main/SpawnPositions").get_child(0).global_position
 	rpc("die_sound", name)
 
 @rpc("any_peer", "call_local", "reliable")
 func die_sound(id: String):
 	if name == id:
 		$Death.play()
+
+@rpc("any_peer", "call_local", "reliable")
+func dash_sound():
+	$Dash.pitch_scale = randf_range(0.9, 1.1)
+	$Dash.play()
 
 @rpc("any_peer", "call_local", "reliable")
 func shot_success(id: String):
@@ -108,7 +141,8 @@ func respawn():
 	if get_node_or_null("/root/Main/SpawnPositions") != null:
 		$CollisionShape2D.disabled = false
 		modulate = Color.WHITE
-		global_position = get_node("/root/Main/SpawnPositions").get_child(randi_range(0, 8)).global_position + Vector2(randi_range(-50, 50), randi_range(-50, 50))
+		var spawnpos = get_node("/root/Main/SpawnPositions")
+		global_position = spawnpos.get_child(randi_range(1, spawnpos.get_child_count() - 2)).global_position + Vector2(randi_range(-50, 50), randi_range(-50, 50))
 
 @rpc("any_peer","call_local", "reliable")
 func croak(pos: Vector2):
@@ -119,3 +153,11 @@ func croak(pos: Vector2):
 
 func _on_bullet_timer_timeout() -> void:
 	gun_reloaded = true
+
+func _on_dash_timer_timeout():
+	dash_reloaded = true
+
+@rpc("any_peer", "call_local", "reliable")
+func add_bullet(amount: int):
+	$pickup.play()
+	remaining_bullets += amount

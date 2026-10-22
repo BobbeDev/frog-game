@@ -8,6 +8,9 @@ font_color = Color(1, 0.79607844, 0, 1)
 outline_size = 47
 outline_color = Color(1, 0, 1, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_ltihx"]
+font_size = 32
+
 [node name="Canvas_UI" type="CanvasLayer" unique_id=461490731]
 script = ExtResource("1_eyijp")
 
@@ -90,6 +93,16 @@ offset_top = 183.0
 offset_right = 146.0
 offset_bottom = 206.0
 text = "Player count: 0"
+
+[node name="version" type="Label" parent="." unique_id=336398571]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+text = "version: 999999999999999999"
+label_settings = SubResource("LabelSettings_ltihx")
 
 [connection signal="pressed" from="kids/Server" to="." method="_on_server_pressed"]
 [connection signal="pressed" from="kids/Client" to="." method="_on_client_pressed"]

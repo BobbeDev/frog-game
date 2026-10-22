@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://345i4nruhd4j"
-path="res://.godot/imported/death.wav-f0eccc243df32e7656ed6194637ca93b.sample"
+uid="uid://bxw1o5pwvnlix"
+path="res://.godot/imported/frog-croak.wav-44f71dcf56c97216d0f846e208cc09e1.sample"
 
 [deps]
 
-source_file="res://death.wav"
-dest_files=["res://.godot/imported/death.wav-f0eccc243df32e7656ed6194637ca93b.sample"]
+source_file="res://Audio/frog-croak.wav"
+dest_files=["res://.godot/imported/frog-croak.wav-44f71dcf56c97216d0f846e208cc09e1.sample"]
 
 [params]
 

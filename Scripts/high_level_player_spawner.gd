@@ -1,6 +1,7 @@
 extends MultiplayerSpawner
 
-@export var network_player: PackedScene
+@export var lobby: bool
+@export var network_players: Array[PackedScene]
 
 func _ready() -> void:
 	multiplayer.peer_disconnected.connect(del_player)
@@ -19,7 +20,11 @@ func _ready() -> void:
 func spawn_player(id: int):
 	if !multiplayer.is_server(): return
 	
-	var player: Node = network_player.instantiate()
+	var player: Node
+	if lobby:
+		player = network_players[0].instantiate()
+	else:
+		player = network_players[MultiplayerManager.game_mode].instantiate()
 	player.name = str(id)
 	
 	get_node(spawn_path).call_deferred("add_child", player)

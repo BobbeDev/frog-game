@@ -1,30 +1,36 @@
-[gd_scene format=3 uid="uid://cx5vkgxf002vo"]
+[gd_scene format=3 uid="uid://dkfx2r1mxumb8"]
 
-[ext_resource type="Script" uid="uid://djwhlg64vt2u4" path="res://Scripts/Movement.gd" id="1_6ekd3"]
-[ext_resource type="PackedScene" uid="uid://b8a88maqfgkpf" path="res://SceneObjects/bullet.tscn" id="2_j38ec"]
-[ext_resource type="Texture2D" uid="uid://dagbs3hyiuaq7" path="res://Sprites/frog.png" id="2_slgur"]
-[ext_resource type="AudioStream" uid="uid://bxw1o5pwvnlix" path="res://frog-croak.wav" id="3_slgur"]
-[ext_resource type="AudioStream" uid="uid://345i4nruhd4j" path="res://death.wav" id="4_5cyyp"]
-[ext_resource type="Texture2D" uid="uid://b1f1m2qhvcesq" path="res://Sprites/gun.png" id="4_byod8"]
-[ext_resource type="Texture2D" uid="uid://cu1g25te76ln1" path="res://Sprites/frog-skin.png" id="4_rd326"]
+[ext_resource type="Script" uid="uid://djwhlg64vt2u4" path="res://Scripts/Movement.gd" id="1_igx88"]
+[ext_resource type="PackedScene" uid="uid://b8a88maqfgkpf" path="res://SceneObjects/bullet.tscn" id="2_i7d62"]
+[ext_resource type="Texture2D" uid="uid://dagbs3hyiuaq7" path="res://Sprites/frog.png" id="3_jubjk"]
+[ext_resource type="Texture2D" uid="uid://cu1g25te76ln1" path="res://Sprites/frog-skin.png" id="4_a4xly"]
+[ext_resource type="AudioStream" uid="uid://345i4nruhd4j" path="res://Audio/death.wav" id="5_iayk5"]
+[ext_resource type="AudioStream" uid="uid://bxw1o5pwvnlix" path="res://Audio/frog-croak.wav" id="6_tb0ox"]
+[ext_resource type="AudioStream" uid="uid://cyttl76lajihu" path="res://Audio/dash.wav" id="7_gjy5t"]
+[ext_resource type="Texture2D" uid="uid://b1f1m2qhvcesq" path="res://Sprites/gun.png" id="8_ttbqj"]
+[ext_resource type="Texture2D" uid="uid://d8olmmks6wo2" path="res://Sprites/radial0.png" id="9_ccroj"]
+[ext_resource type="AudioStream" uid="uid://cftqiadadjnt4" path="res://Audio/pickup.wav" id="9_srnx5"]
+[ext_resource type="Script" uid="uid://88ehd7g7ybio" path="res://Scripts/radial.gd" id="10_flo8n"]
+[ext_resource type="Texture2D" uid="uid://62u2embjasr6" path="res://Sprites/radial1.png" id="11_6vgsb"]
+[ext_resource type="Texture2D" uid="uid://dxw0t1xmpfgph" path="res://Sprites/radial2.png" id="12_sqs6b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uu6xs"]
 radius = 15.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ekd3"]
-atlas = ExtResource("2_slgur")
+atlas = ExtResource("3_jubjk")
 region = Rect2(738, 0, 246, 219)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_slgur"]
-atlas = ExtResource("2_slgur")
+atlas = ExtResource("3_jubjk")
 region = Rect2(0, 0, 246, 219)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uu6xs"]
-atlas = ExtResource("2_slgur")
+atlas = ExtResource("3_jubjk")
 region = Rect2(246, 0, 246, 219)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r0du0"]
-atlas = ExtResource("2_slgur")
+atlas = ExtResource("3_jubjk")
 region = Rect2(492, 0, 246, 219)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rxg2q"]
@@ -58,19 +64,19 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rd326"]
-atlas = ExtResource("4_rd326")
+atlas = ExtResource("4_a4xly")
 region = Rect2(738, 0, 246, 219)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvt0w"]
-atlas = ExtResource("4_rd326")
+atlas = ExtResource("4_a4xly")
 region = Rect2(0, 0, 246, 219)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_40hiu"]
-atlas = ExtResource("4_rd326")
+atlas = ExtResource("4_a4xly")
 region = Rect2(246, 0, 246, 219)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_omj1a"]
-atlas = ExtResource("4_rd326")
+atlas = ExtResource("4_a4xly")
 region = Rect2(492, 0, 246, 219)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8kk5g"]
@@ -151,15 +157,15 @@ properties/14/spawn = true
 properties/14/replication_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kk5g"]
-atlas = ExtResource("4_byod8")
+atlas = ExtResource("8_ttbqj")
 region = Rect2(0, 0, 188, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aumaf"]
-atlas = ExtResource("4_byod8")
+atlas = ExtResource("8_ttbqj")
 region = Rect2(0, 96, 188, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o353j"]
-atlas = ExtResource("4_byod8")
+atlas = ExtResource("8_ttbqj")
 region = Rect2(0, 0, 188, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aumaf"]
@@ -188,9 +194,11 @@ animations = [{
 collision_layer = 16
 motion_mode = 1
 platform_on_leave = 2
-script = ExtResource("1_6ekd3")
+script = ExtResource("1_igx88")
 speed = 200.0
-bullet_scene = ExtResource("2_j38ec")
+bullet_speed = 4000.0
+bullet_scene = ExtResource("2_i7d62")
+limited_bullets = true
 metadata/PlayerNumber = 0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1054771423]
@@ -218,12 +226,16 @@ animation = &"Walk"
 replication_config = SubResource("SceneReplicationConfig_6ekd3")
 
 [node name="Death" type="AudioStreamPlayer2D" parent="." unique_id=1646051870]
-stream = ExtResource("4_5cyyp")
+stream = ExtResource("5_iayk5")
 volume_db = -5.0
 
 [node name="Yelp" type="AudioStreamPlayer2D" parent="." unique_id=328494407]
-stream = ExtResource("3_slgur")
+stream = ExtResource("6_tb0ox")
 pitch_scale = 1.25
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="." unique_id=953726268]
+stream = ExtResource("7_gjy5t")
+max_distance = 1000.0
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1098291236]
 
@@ -256,4 +268,69 @@ horizontal_alignment = 1
 [node name="BulletTimer" type="Timer" parent="." unique_id=2113992504]
 one_shot = true
 
+[node name="DashTimer" type="Timer" parent="." unique_id=2035669259]
+wait_time = 5.0
+one_shot = true
+
+[node name="pickup" type="AudioStreamPlayer" parent="." unique_id=725240123]
+stream = ExtResource("9_srnx5")
+
+[node name="Indicator" type="Control" parent="." unique_id=1490129279]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 34.0
+offset_bottom = 34.0
+scale = Vector2(0.25, 0.25)
+
+[node name="ProgressBar" type="TextureProgressBar" parent="Indicator" unique_id=1254752552 node_paths=PackedStringArray("monitoring_timer")]
+modulate = Color(1, 0.36, 0.36, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = -64.0
+offset_right = 64.0
+offset_bottom = 128.0
+max_value = 1.0
+step = 0.0
+value = 1.0
+fill_mode = 4
+texture_progress = ExtResource("9_ccroj")
+script = ExtResource("10_flo8n")
+monitoring_timer = NodePath("../../BulletTimer")
+
+[node name="ProgressBar2" type="TextureProgressBar" parent="Indicator" unique_id=514402064 node_paths=PackedStringArray("monitoring_timer")]
+modulate = Color(0.27999997, 0.50800014, 1, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = -64.0
+offset_right = 64.0
+offset_bottom = 128.0
+max_value = 5.0
+step = 0.0
+value = 5.0
+fill_mode = 4
+texture_progress = ExtResource("11_6vgsb")
+script = ExtResource("10_flo8n")
+monitoring_timer = NodePath("../../DashTimer")
+
+[node name="ProgressBar3" type="TextureProgressBar" parent="Indicator" unique_id=1454303105]
+texture_filter = 1
+layout_mode = 0
+offset_left = -85.225
+offset_top = -20.815
+offset_right = 84.775
+offset_bottom = 149.185
+max_value = 5.0
+step = 0.0
+value = 5.0
+rounded = true
+fill_mode = 4
+texture_under = ExtResource("12_sqs6b")
+texture_progress = ExtResource("12_sqs6b")
+tint_under = Color(0.19650194, 0.19650194, 0.19650194, 1)
+tint_progress = Color(0.31600004, 1, 0.27999997, 1)
+script = ExtResource("10_flo8n")
+monitor_variable = "remaining_bullets"
+monitor_max_variable = "starting_bullets"
+
 [connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

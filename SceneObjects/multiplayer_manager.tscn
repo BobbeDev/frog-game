@@ -12,6 +12,7 @@ outline_color = Color(1, 0, 1, 1)
 script = ExtResource("1_l1ko5")
 colors = Array[Color]([Color(0.48235294, 0.8509804, 0.25882354, 1), Color(0.32999998, 0.45283318, 1, 1), Color(0.82, 0.090200014, 0.10236315, 1), Color(0.8973332, 0.120000005, 1, 1), Color(1, 0.49366665, 0.01999998, 1), Color(0, 0.48, 0.224, 1), Color(0.30692276, 0.30692267, 0.3069227, 1), Color(1, 1, 1, 1), Color(0.21699989, 0.13, 1, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1)])
 placeholder_names = Array[String](["pesky slime", "petty slime", "patient slime", "pretty slime", "perceptive slime", "practical slime", "polite slime", "pure slime", "fucking ugly slime", "penis slime", "PLAYER 11", "PLAYER 12", "PLAYER 13", "PLAYER 14", "PLAYER 15", "PLAYER 16", "PLAYER 17", "PLAYER 18", "PLAYER 19", "PLAYER 20", "PLAYER 21", "PLAYER 22", "PLAYER 23", "PLAYER 24", "PLAYER 25", "PLAYER 26", "PLAYER 27", "PLAYER 28", "PLAYER 29", "PLAYER 30", "PLAYER 31", "PLAYER 32"])
+map_scenes = Array[String](["res://Scenes/Map1.tscn", "res://Scenes/Map2.tscn"])
 
 [node name="Server" type="CanvasLayer" parent="." unique_id=387499664]
 visible = false
@@ -38,14 +39,45 @@ offset_top = 148.0
 offset_right = 54.0
 offset_bottom = 171.0
 
-[node name="OptionButton" type="OptionButton" parent="Server" unique_id=43636664]
-offset_left = 841.0
-offset_top = 231.0
-offset_right = 1037.0
-offset_bottom = 262.0
+[node name="GameMode" type="OptionButton" parent="Server" unique_id=43636664]
+offset_left = 768.0
+offset_top = 234.0
+offset_right = 1007.0
+offset_bottom = 265.0
+selected = 0
+item_count = 4
+popup/item_0/text = "Game Type: Basic Gun"
+popup/item_0/id = 0
+popup/item_1/text = "Game Type: Fast Gun"
+popup/item_1/id = 1
+popup/item_2/text = "Game Type: Barrage Gun"
+popup/item_2/id = 2
+popup/item_3/text = "Game Type: Shared Bullets"
+popup/item_3/id = 3
+
+[node name="GameMap" type="OptionButton" parent="Server" unique_id=1107913353]
+offset_left = 768.0
+offset_top = 284.0
+offset_right = 1007.0
+offset_bottom = 315.0
 selected = 0
 item_count = 2
-popup/item_0/text = "Game Type: Shooting"
+popup/item_0/text = "Game Map: Map 1"
 popup/item_0/id = 0
-popup/item_1/text = "Game Type: Bombs"
+popup/item_1/text = "Game Map: Map 2"
 popup/item_1/id = 1
+
+[node name="SpinBox" type="SpinBox" parent="Server" unique_id=1316824372]
+offset_left = 768.0
+offset_top = 335.0
+offset_right = 1007.0
+offset_bottom = 366.0
+min_value = 1.0
+max_value = 10.0
+value = 5.0
+rounded = true
+prefix = "Rounds:"
+
+[connection signal="item_selected" from="Server/GameMode" to="." method="change_mode"]
+[connection signal="item_selected" from="Server/GameMap" to="." method="change_map"]
+[connection signal="value_changed" from="Server/SpinBox" to="." method="change_rounds"]

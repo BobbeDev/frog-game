@@ -1,10 +1,7 @@
 extends CanvasLayer
 
-#213.47.75.14
-#192.168.0.220
-#4174
-
 func _ready() -> void:
+	$version.text = "Version: " + ProjectSettings.get_setting("application/config/version")
 	@warning_ignore("integer_division")
 	get_window().size = Vector2(1156/2, 648/2)
 
@@ -12,6 +9,7 @@ func _on_server_pressed() -> void:
 	HighLevelNetworkHandler.start_server($kids/IP.text, int($kids/Port.text))
 	$kids.hide()
 	$Server.show()
+	AudioServer.set_bus_mute(0, true)
 	get_tree().change_scene_to_file("res://Scenes/Lobby.tscn")
 
 func _on_client_pressed() -> void:

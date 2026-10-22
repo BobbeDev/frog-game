@@ -26,8 +26,12 @@ func _on_body_entered(body: Node) -> void:
 				get_node(node_path).rpc_id(int(body.name), "die")
 				queue_free()
 		else:
-			$hit.pitch_scale = 2
-			$hit.play()
+			rpc("hit_wall")
+
+@rpc("any_peer", "call_local")
+func hit_wall():
+	$hit.pitch_scale = 2
+	$hit.play()
 
 @rpc("any_peer", "call_local", "reliable")
 func send_score(bullet_id: String, hitplayer_id: String):

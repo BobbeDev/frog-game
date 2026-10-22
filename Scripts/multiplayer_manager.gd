@@ -1,11 +1,17 @@
 extends Node
 
+var game_active: bool = false
 var player_amount = 0
 var kills = 0
 var round_won: bool = false
+var game_mode: int = 0
+var game_map: int = 0
+var game_rounds: int = 5
 
 @export var colors: Array[Color]
 @export var placeholder_names: Array[String]
+@export var map_scenes: Array[String]
+@onready var bullet_pickup: PackedScene = preload("res://SceneObjects/bullet_pickup.tscn")
 var username: String
 var chatting: bool
 var player_data: Dictionary
@@ -56,7 +62,7 @@ func add_score(bullet_id: String, hitplayer_id: String):
 		for p in players:
 			if !p.dead:
 				player_data[p.name].score += 1
-				if player_data[p.name].score >= 5:
+				if player_data[p.name].score >= game_rounds:
 					winner_id = p.name
 				get_node("/root/Main/Ui/Notifications").rpc("send_text","[color=#" + str(player_data.get(p.name).color) + "]" + player_data.get(p.name).name + "[/color] Won the round")
 				
@@ -72,6 +78,7 @@ func add_score(bullet_id: String, hitplayer_id: String):
 		if winner_id != "":
 			for id in multiplayer.get_peers():
 				player_data[str(id)].score = 0
+			game_active = false
 			rpc("change_scene", "res://Scenes/Lobby.tscn")
 			return
 		kills = 0
@@ -111,6 +118,7 @@ func ready_up(is_ready: bool, id: String):
 	
 	var all_ready = true
 	var players = get_tree().get_nodes_in_group("Player")
+	if players.size() < 2: return
 	for p in players:
 		print(player_data.get(p.name).name, "  ", player_data.get(p.name).ready)
 		if player_data.get(p.name).ready == false:
@@ -118,8 +126,16 @@ func ready_up(is_ready: bool, id: String):
 	print("---------------------------------------")
 	
 	if all_ready == true:
+		game_active = true
 		#await get_tree().create_timer(1).timeout
-		rpc("change_scene", "res://Scenes/Main.tscn")
+		rpc("change_scene", map_scenes[game_map])
+
+func bullet_fired():
+	if !game_active: return
+	match game_mode:
+		3: #limited bullets mode
+			var pickup = bullet_pickup.instantiate()
+			get_node("/root/Main").add_child(pickup, true)
 
 func _process(_delta: float) -> void:
 	if multiplayer.is_server():
@@ -128,3 +144,12 @@ func _process(_delta: float) -> void:
 			if player_data.has(str(id)):
 				textgen += str(player_data.get(str(id)).name) + "   " + str(player_data.get(str(id)).score) + "   " + str(player_data.get(str(id)).color) + "   " + str(player_data.get(str(id)).ready) + "\n"
 		$Server/Label2.text = textgen
+
+func change_mode(new_mode: int):
+	game_mode = new_mode
+
+func change_map(new_map: int):
+	game_map = new_map
+
+func change_rounds(new_round_count: float):
+	game_rounds = int(new_round_count)

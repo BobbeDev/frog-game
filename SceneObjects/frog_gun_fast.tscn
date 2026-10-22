@@ -1,0 +1,310 @@
+[gd_scene format=3 uid="uid://che0ry8kwj2ij"]
+
+[ext_resource type="Script" uid="uid://djwhlg64vt2u4" path="res://Scripts/Movement.gd" id="1_u6aag"]
+[ext_resource type="PackedScene" uid="uid://b8a88maqfgkpf" path="res://SceneObjects/bullet.tscn" id="2_q4iko"]
+[ext_resource type="Texture2D" uid="uid://dagbs3hyiuaq7" path="res://Sprites/frog.png" id="3_bmu6j"]
+[ext_resource type="Texture2D" uid="uid://cu1g25te76ln1" path="res://Sprites/frog-skin.png" id="4_aq8m6"]
+[ext_resource type="AudioStream" uid="uid://345i4nruhd4j" path="res://Audio/death.wav" id="5_nbv13"]
+[ext_resource type="AudioStream" uid="uid://cyttl76lajihu" path="res://Audio/dash.wav" id="6_nbv13"]
+[ext_resource type="AudioStream" uid="uid://bxw1o5pwvnlix" path="res://Audio/frog-croak.wav" id="6_r4rvl"]
+[ext_resource type="Texture2D" uid="uid://b1f1m2qhvcesq" path="res://Sprites/gun.png" id="7_m35w5"]
+[ext_resource type="Texture2D" uid="uid://d8olmmks6wo2" path="res://Sprites/radial0.png" id="8_aq8m6"]
+[ext_resource type="Script" uid="uid://88ehd7g7ybio" path="res://Scripts/radial.gd" id="9_nbv13"]
+[ext_resource type="Texture2D" uid="uid://62u2embjasr6" path="res://Sprites/radial1.png" id="10_r4rvl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uu6xs"]
+radius = 15.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ekd3"]
+atlas = ExtResource("3_bmu6j")
+region = Rect2(738, 0, 246, 219)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slgur"]
+atlas = ExtResource("3_bmu6j")
+region = Rect2(0, 0, 246, 219)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uu6xs"]
+atlas = ExtResource("3_bmu6j")
+region = Rect2(246, 0, 246, 219)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0du0"]
+atlas = ExtResource("3_bmu6j")
+region = Rect2(492, 0, 246, 219)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rxg2q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ekd3")
+}],
+"loop": false,
+"name": &"Glup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slgur")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uu6xs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0du0")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd326"]
+atlas = ExtResource("4_aq8m6")
+region = Rect2(738, 0, 246, 219)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvt0w"]
+atlas = ExtResource("4_aq8m6")
+region = Rect2(0, 0, 246, 219)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40hiu"]
+atlas = ExtResource("4_aq8m6")
+region = Rect2(246, 0, 246, 219)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omj1a"]
+atlas = ExtResource("4_aq8m6")
+region = Rect2(492, 0, 246, 219)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8kk5g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rd326")
+}],
+"loop": false,
+"name": &"Glup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvt0w")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40hiu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omj1a")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 10.0
+}]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6ekd3"]
+properties/0/path = NodePath("Frog:frame")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Frog:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Yelp:playing")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("Yelp:pitch_scale")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("GunHand:rotation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Username:text")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath("Skin:modulate")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+properties/7/path = NodePath("Skin:frame")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("Skin:animation")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath(".:player_color")
+properties/9/spawn = true
+properties/9/replication_mode = 2
+properties/10/path = NodePath("GunHand/Gun:animation")
+properties/10/spawn = true
+properties/10/replication_mode = 1
+properties/11/path = NodePath("GunHand/Gun:frame")
+properties/11/spawn = true
+properties/11/replication_mode = 1
+properties/12/path = NodePath("CollisionShape2D:disabled")
+properties/12/spawn = true
+properties/12/replication_mode = 1
+properties/13/path = NodePath(".:modulate")
+properties/13/spawn = true
+properties/13/replication_mode = 1
+properties/14/path = NodePath(".:position")
+properties/14/spawn = true
+properties/14/replication_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kk5g"]
+atlas = ExtResource("7_m35w5")
+region = Rect2(0, 0, 188, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aumaf"]
+atlas = ExtResource("7_m35w5")
+region = Rect2(0, 96, 188, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o353j"]
+atlas = ExtResource("7_m35w5")
+region = Rect2(0, 0, 188, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aumaf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kk5g")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aumaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o353j")
+}],
+"loop": false,
+"name": &"Shoot",
+"speed": 10.0
+}]
+
+[node name="Frog" type="CharacterBody2D" unique_id=1549518833 groups=["Player"]]
+collision_layer = 16
+motion_mode = 1
+platform_on_leave = 2
+script = ExtResource("1_u6aag")
+speed = 400.0
+bullet_speed = 9000.0
+bullet_scene = ExtResource("2_q4iko")
+metadata/PlayerNumber = 0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1054771423]
+enabled = false
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=406317551]
+z_index = 1
+shape = SubResource("CircleShape2D_uu6xs")
+
+[node name="Frog" type="AnimatedSprite2D" parent="." unique_id=1782239824]
+texture_filter = 1
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rxg2q")
+animation = &"Walk"
+
+[node name="Skin" type="AnimatedSprite2D" parent="." unique_id=1385334822]
+texture_filter = 1
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_8kk5g")
+animation = &"Walk"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2109648248]
+replication_config = SubResource("SceneReplicationConfig_6ekd3")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="." unique_id=1646051870]
+stream = ExtResource("5_nbv13")
+volume_db = -5.0
+
+[node name="Yelp" type="AudioStreamPlayer2D" parent="." unique_id=328494407]
+stream = ExtResource("6_r4rvl")
+pitch_scale = 1.25
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="." unique_id=1192130259]
+stream = ExtResource("6_nbv13")
+max_distance = 1000.0
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1098291236]
+
+[node name="GunHand" type="Node2D" parent="." unique_id=642077367]
+scale = Vector2(0.25, 0.25)
+
+[node name="Gun" type="AnimatedSprite2D" parent="GunHand" unique_id=834179307]
+texture_filter = 1
+position = Vector2(250, 0)
+sprite_frames = SubResource("SpriteFrames_aumaf")
+animation = &"Shoot"
+frame = 1
+frame_progress = 1.0
+
+[node name="Username" type="Label" parent="." unique_id=1599391420]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -169.0
+offset_top = -57.0
+offset_right = 169.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Name"
+horizontal_alignment = 1
+
+[node name="BulletTimer" type="Timer" parent="." unique_id=2113992504]
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="." unique_id=394169001]
+wait_time = 2.0
+one_shot = true
+
+[node name="Indicator" type="Control" parent="." unique_id=979527975]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 26.0
+offset_bottom = 26.0
+scale = Vector2(0.25, 0.25)
+
+[node name="ProgressBar" type="TextureProgressBar" parent="Indicator" unique_id=59797658 node_paths=PackedStringArray("monitoring_timer")]
+modulate = Color(1, 0.36, 0.36, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = -64.0
+offset_right = 64.0
+offset_bottom = 128.0
+max_value = 1.0
+step = 0.0
+value = 1.0
+fill_mode = 4
+texture_progress = ExtResource("8_aq8m6")
+script = ExtResource("9_nbv13")
+monitoring_timer = NodePath("../../BulletTimer")
+
+[node name="ProgressBar2" type="TextureProgressBar" parent="Indicator" unique_id=1037142503 node_paths=PackedStringArray("monitoring_timer")]
+modulate = Color(0.27999997, 0.50800014, 1, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = -64.0
+offset_right = 64.0
+offset_bottom = 128.0
+max_value = 2.0
+step = 0.0
+value = 2.0
+fill_mode = 4
+texture_progress = ExtResource("10_r4rvl")
+script = ExtResource("9_nbv13")
+monitoring_timer = NodePath("../../DashTimer")
+
+[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
